@@ -4,7 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [data, getData] = useState([]);
-  const [privatekey, getPrivatekey] = useState([]);
   const FetchData = async (link) => {
     try {
       const res = await axios.get(link);
@@ -30,8 +29,6 @@ export default function Home() {
       getData(res.data);
     } catch (error) {}
   };
-  console.log(privatekey);
-
   return (
     <div className="p-4">
       <h1 className="text-center font-bold text-4xl">Danh sách Endpoints</h1>
@@ -196,7 +193,7 @@ export default function Home() {
           <div className="flex gap-3 items-center mt-2 mb-2">
             <span className="font-bold">
               Response: Bấm nút bên cạnh để thử tạo user mới , đừng spam vì DB
-              có giới hạn.
+              có giới hạn.{" "}
             </span>
             <button
               onClick={() => {
@@ -241,78 +238,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mt-5">
-          <div className="w-full  h-[50px] rounded-4xl flex flex-col p-2 border">
-            <input
-              className="w-full h-full outline-none"
-              type="text"
-              placeholder="Address from"
-            />
-          </div>
-          <div className="mt-2 w-full  h-[50px] rounded-4xl flex flex-col p-2 border">
-            <input
-              className="w-full h-full outline-none"
-              type="text"
-              placeholder="Address to"
-            />
-          </div>
-          <div className="mt-2 w-full  h-[50px] rounded-4xl flex flex-col p-2 border">
-            <input
-              className="w-full h-full outline-none"
-              type="text"
-              placeholder="Amount"
-            />
-          </div>
-          <div className="mt-2 w-full  h-[50px] rounded-4xl flex flex-col p-2 border">
-            <input
-              className="w-full h-full outline-none"
-              type="text"
-              placeholder="PrivateKey"
-            />
-          </div>
-        </div>
-        <div className="mt-2">
-          <span className="font-bold">
-            Lướt lên lấy address dán vào dưới này và bấm vào nút để lấy được
-            private key để test
-          </span>
-          <div className="flex items-center gap-[20px]">
-            <div className="mt-2 w-[500px]  h-[50px] rounded-4xl flex flex-col p-2 border">
-              <input
-                className="w-full h-full outline-none"
-                type="text"
-                placeholder="Address cần lấy private key"
-                onChange={(e) => {
-                  getPrivatekey(e.target.value);
-                }}
-              />
-            </div>
-            <div className="mt-2 w-[500px]  h-[50px] rounded-4xl flex flex-col p-2 border">
-              <input
-                className="w-full h-full outline-none"
-                type="text"
-                placeholder="Copy private key tại đây"
-              />
-            </div>
-            <button
-              onClick={() => {
-                FetchData(
-                  " https://miniblockchain.vercel.app/api/transaction/686cd78ceabb453001dc499b2e2bfd5a6ff48da6d776480a543a7bf0432611bc"
-                );
-              }}
-              className="w-[250px] h-[50px] bg-green-200 rounded-[8px] cursor-pointer"
-            >
-              Bấm vào đây để get private key
-            </button>
-          </div>
-        </div>
         <div>
           <div className="flex gap-3 items-center mt-2 mb-2">
             <span className="font-bold">Response:</span>
             <button
               onClick={() => {
-                FetchData(
-                  " https://miniblockchain.vercel.app/api/transaction/686cd78ceabb453001dc499b2e2bfd5a6ff48da6d776480a543a7bf0432611bc"
+                SendMoney(
+                  "https://miniblockchain.vercel.app/api/transaction/send"
                 );
               }}
               className="px-4 py-[2px] bg-green-200 rounded-[8px] cursor-pointer"
