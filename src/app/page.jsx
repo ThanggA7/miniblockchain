@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 export default function Home() {
   const [data, getData] = useState([]);
+  const [privatekey, getPrivatekey] = useState([]);
   const FetchData = async (link) => {
     try {
       const res = await axios.get(link);
@@ -29,6 +30,8 @@ export default function Home() {
       getData(res.data);
     } catch (error) {}
   };
+  console.log(privatekey);
+
   return (
     <div className="p-4">
       <h1 className="text-center font-bold text-4xl">Danh sách Endpoints</h1>
@@ -279,6 +282,9 @@ export default function Home() {
                 className="w-full h-full outline-none"
                 type="text"
                 placeholder="Address cần lấy private key"
+                onChange={(e) => {
+                  getPrivatekey(e.target.value);
+                }}
               />
             </div>
             <div className="mt-2 w-[500px]  h-[50px] rounded-4xl flex flex-col p-2 border">
